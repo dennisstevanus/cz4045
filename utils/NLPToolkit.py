@@ -8,35 +8,36 @@ from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 
 class NLPToolkit:
 
-    def __init__(self, document, save_file="", unique_identifier=""):
-        self.json_dict = {
-            'unique_identifier': "",
-            'token': [],
-            'stemmed_token': [],
-            'segmented_sentence': [],
-            'pos_tagger': [],
-        }
-        if unique_identifier != "":
-            self.json_dict['unique_identifier'] = unique_identifier
-        word_tokenize_set = self.word_tokenizer(document)
-        for x in word_tokenize_set:
-            self.json_dict['token'].append(x)
+    def __init__(self, document=None, save_file="", unique_identifier=""):
+        if document is not None:
+            self.json_dict = {
+                'unique_identifier': "",
+                'token': [],
+                'stemmed_token': [],
+                'segmented_sentence': [],
+                'pos_tagger': [],
+            }
+            if unique_identifier != "":
+                self.json_dict['unique_identifier'] = unique_identifier
+            word_tokenize_set = self.word_tokenizer(document)
+            for x in word_tokenize_set:
+                self.json_dict['token'].append(x)
 
-        stemmed_token = self.stemmer(self.json_dict['token'])
-        for x in stemmed_token:
-            self.json_dict['stemmed_token'].append(x)
+            stemmed_token = self.stemmer(self.json_dict['token'])
+            for x in stemmed_token:
+                self.json_dict['stemmed_token'].append(x)
 
-        segmented_sentence = self.sentence_segmentation(document)
-        for x in segmented_sentence:
-            self.json_dict['segmented_sentence'].append(x)
+            segmented_sentence = self.sentence_segmentation(document)
+            for x in segmented_sentence:
+                self.json_dict['segmented_sentence'].append(x)
 
-        for i in segmented_sentence:
-            pos_tagged_tokens = self.pos_tagger(i)
-            self.json_dict['pos_tagger'].append(pos_tagged_tokens)
+            for i in segmented_sentence:
+                pos_tagged_tokens = self.pos_tagger(i)
+                self.json_dict['pos_tagger'].append(pos_tagged_tokens)
 
-        # print(self.json_dict)
-        if save_file != "":
-            self.json_converter(self.json_dict, save_file)
+            # print(self.json_dict)
+            if save_file != "":
+                self.json_converter(self.json_dict, save_file)
 
     def get_json(self):
         return self.json_dict
@@ -69,6 +70,12 @@ class NLPToolkit:
         tokens = nltk.word_tokenize(sentence)
         pos_tagged_tokens = nltk.pos_tag(tokens)
         return pos_tagged_tokens
+
+    # Generate bigrams iterator of a sequence/text
+    @staticmethod
+    def generate_bigrams(sequence):
+        bigrams = nltk.bigrams(sequence)
+        return bigrams
 
     # Json_converter will make the dictionary into a json format.
     # Change the file name when you are inputting the different file
