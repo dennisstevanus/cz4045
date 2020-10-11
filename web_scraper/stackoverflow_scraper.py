@@ -1,16 +1,16 @@
 import logging
+import os
 from pprint import pprint
 
 import bs4
 import requests
+import pandas
 from bs4 import BeautifulSoup
 
-from web_scraper import get_soup, sanitize_text
-
-urls = ["https://stackoverflow.com/questions/17429123/how-to-join-two-sets-in-one-line-without-using"]
+from web_scraper import WebScraper
 
 
-class StackOverFlowScraper:
+class StackOverFlowScraper(WebScraper):
     QUESTION_CLASS_ATTRIBUTE = 'question'
     ANSWER_CLASS_ATTRIBUTE = 'answer'
     CONTENT_CLASS_ATTRIBUTE = 's-prose'
@@ -29,7 +29,7 @@ class StackOverFlowScraper:
                 answer_content = cls.exclude_code_blocks(answer_content)
 
                 text = answer_content.get_text()
-                text = sanitize_text(text)
+                text = cls.sanitize_text(text)
                 # pprint(text)
                 results.append(text)
         else:
@@ -42,10 +42,9 @@ class StackOverFlowScraper:
         question_post = html_soup.find(attrs={'class': cls.QUESTION_CLASS_ATTRIBUTE})
         if question_post is not None:
             question_content = question_post.find(attrs={'class': cls.CONTENT_CLASS_ATTRIBUTE})
-            print(type(question_content))
             question_content = cls.exclude_code_blocks(question_content)
             text = question_content.get_text()
-            result = sanitize_text(text)
+            result = cls.sanitize_text(text)
         else:
             logging.warning("question not found!")
         return result
@@ -60,9 +59,14 @@ class StackOverFlowScraper:
 
 
 if __name__ == "__main__":
+    filename = "Data Gathering - Python.csv"
+    data_directory = "data"
+    parent_dir = os.path.dirname(os.getcwd())
+    so_df = pandas.read_csv(os.path.join(parent_dir, data_directory, filename))
+    urls = so_df['URL']
+    # urls = ["https://stackoverflow.com/questions/17429123/how-to-join-two-sets-in-one-line-without-using"]
     for url in urls:
-        soup = get_soup(url)
-        print(type(soup))
+        soup = StackOverFlowScraper.get_soup(url)
         question = StackOverFlowScraper.get_question(soup)
         pprint(question)
         answers = StackOverFlowScraper.get_answers(soup)
