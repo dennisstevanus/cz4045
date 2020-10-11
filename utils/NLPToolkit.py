@@ -7,14 +7,17 @@ from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 
 
 class NLPToolkit:
-    json_dict = {
-        'token': [],
-        'stemmed_token': [],
-        'segmented_sentence': [],
-        'pos_tagger': [],
-    }
 
-    def __init__(self, document, save_file=""):
+    def __init__(self, document, save_file="", unique_identifier=""):
+        self.json_dict = {
+            'unique_identifier': "",
+            'token': [],
+            'stemmed_token': [],
+            'segmented_sentence': [],
+            'pos_tagger': [],
+        }
+        if unique_identifier != "":
+            self.json_dict['unique_identifier'] = unique_identifier
         word_tokenize_set = self.word_tokenizer(document)
         for x in word_tokenize_set:
             self.json_dict['token'].append(x)
@@ -31,9 +34,12 @@ class NLPToolkit:
             pos_tagged_tokens = self.pos_tagger(i)
             self.json_dict['pos_tagger'].append(pos_tagged_tokens)
 
-        print(self.json_dict)
+        # print(self.json_dict)
         if save_file != "":
             self.json_converter(self.json_dict, save_file)
+
+    def get_json(self):
+        return self.json_dict
 
     # Tokenizer will have text as an input, inputting the token into a json_file and returning a status.
     @staticmethod
@@ -67,7 +73,6 @@ class NLPToolkit:
     # Json_converter will make the dictionary into a json format.
     # Change the file name when you are inputting the different file
     @staticmethod
-    def json_converter(dictionary, filename ='json_file_1.json'):
-        with open(filename, 'w') as json_file:
+    def json_converter(dictionary, filename='json_file_1.json'):
+        with open(filename, 'w+', encoding='utf16') as json_file:
             json.dump(dictionary, json_file)
-
