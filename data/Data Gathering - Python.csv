@@ -1,0 +1,32 @@
+Question name,Topic,Specific Topic,URL
+How to join two sets in one line without using “|”,Basic of Python,"Datastructure, Syntax",https://stackoverflow.com/questions/17429123/how-to-join-two-sets-in-one-line-without-using
+Convert a list to a dictionary in Python,Basic of Python,"Datastructure, Syntax",https://stackoverflow.com/questions/4576115/convert-a-list-to-a-dictionary-in-python
+lambda in python can iterate dict?,Basic of Python,"Datastructure, Syntax, Lambda",https://stackoverflow.com/questions/33077274/lambda-in-python-can-iterate-dict
+Type hinting a collection of a specified type,Basic of Python,Syntax,https://stackoverflow.com/questions/24853923/type-hinting-a-collection-of-a-specified-type
+Accessing the index in 'for' loops?,Basic of Python,Syntax,https://stackoverflow.com/questions/522563/accessing-the-index-in-for-loops
+"Keras input explanation: input_shape, units, batch_size, dim, etc",Python in machine learning,"Basic Explanation, Keras",https://stackoverflow.com/questions/44747343/keras-input-explanation-input-shape-units-batch-size-dim-etc
+Where do I call the BatchNormalization function in Keras?,Python in machine learning,"Basic Explanation, Keras",https://stackoverflow.com/questions/34716454/where-do-i-call-the-batchnormalization-function-in-keras
+How does Keras handle multilabel classification?,Python in machine learning,"Basic Explanation, Keras",https://stackoverflow.com/questions/44164749/how-does-keras-handle-multilabel-classification
+"How to compute precision, recall, accuracy and f1-score for the multiclass case with scikit learn?",Python in machine learning,"Syntax, Tensowrflow, ",https://stackoverflow.com/questions/31421413/how-to-compute-precision-recall-accuracy-and-f1-score-for-the-multiclass-case
+Tensorflow: how to save/restore a model?,Python in machine learning,"Syntax, Basic Explanation, Tensorflow",https://stackoverflow.com/questions/33759623/tensorflow-how-to-save-restore-a-model
+How can I one hot encode in Python?,Python in Data Analytics/Data Sciences,"Pandas, Scikit-learn, Syntax",https://stackoverflow.com/questions/37292872/how-can-i-one-hot-encode-in-python
+How to iterate over rows in a DataFrame in Pandas,Python in Data Analytics/Data Sciences,"Pandas, Syntax",https://stackoverflow.com/questions/16476924/how-to-iterate-over-rows-in-a-dataframe-in-pandas
+How to select rows from a DataFrame based on column values?,Python in Data Analytics/Data Sciences,"Pandas, Syntax",https://stackoverflow.com/questions/17071871/how-to-select-rows-from-a-dataframe-based-on-column-values
+How do I read and write CSV files with Python?,Python in Data Analytics/Data Sciences,Syntax,https://stackoverflow.com/questions/41585078/how-do-i-read-and-write-csv-files-with-python
+"Find all columns of dataframe in Pandas whose type is float, or a particular type?",Python in Data Analytics/Data Sciences,"Pandas, Syntax",https://stackoverflow.com/questions/21720022/find-all-columns-of-dataframe-in-pandas-whose-type-is-float-or-a-particular-typ
+Get the data received in a Flask request,Python in web,Flask,https://stackoverflow.com/questions/10434599/get-the-data-received-in-a-flask-request
+How to serve static files in Flask,Python in web,Flask,https://stackoverflow.com/questions/20646822/how-to-serve-static-files-in-flask
+Return JSON response from Flask view,Python in web,Flask,https://stackoverflow.com/questions/13081532/return-json-response-from-flask-view
+"differentiate null=True, blank=True in django",Python in web,Django,https://stackoverflow.com/questions/8609192/differentiate-null-true-blank-true-in-django
+"Django rest framework, use different serializers in the same ModelViewSet",Python in web,"Django, Django-rest-framework",https://stackoverflow.com/questions/22616973/django-rest-framework-use-different-serializers-in-the-same-modelviewset
+,,,
+,,,
+,,,
+,,,
+,,,
+Alternative: ,,,
+How to load a model from an HDF5 file in Keras?,Python in machine learning,Basic Explanation,https://stackoverflow.com/questions/35074549/how-to-load-a-model-from-an-hdf5-file-in-keras/43263973#43263973
+"What is logits, softmax and softmax_cross_entropy_with_logits?",Python in machine learning,Tensorflow,https://stackoverflow.com/questions/34240703/what-is-logits-softmax-and-softmax-cross-entropy-with-logits
+Can I run Keras model on gpu?,Python in machine learning,"GPU, Syntax",https://stackoverflow.com/questions/45662253/can-i-run-keras-model-on-gpu
+Renaming columns in pandas,Python in Data Analytics/Data Sciences,"Pandas, Syntax",https://stackoverflow.com/questions/11346283/renaming-columns-in-pandas
+Scikit-learn's LabelBinarizer vs. OneHotEncoder,Python in Data Analytics/Data Sciences,"Scikit-learn, encoding",https://stackoverflow.com/questions/50473381/scikit-learns-labelbinarizer-vs-onehotencoder
