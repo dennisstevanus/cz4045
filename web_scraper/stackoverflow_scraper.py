@@ -9,6 +9,7 @@ import pandas
 from bs4 import BeautifulSoup
 
 from web_scraper import WebScraper
+from utils.NLPToolkit import NLPToolkit
 
 
 class StackOverFlowScraper(WebScraper):
@@ -60,13 +61,18 @@ class StackOverFlowScraper(WebScraper):
 
 
 if __name__ == "__main__":
+    logging.root.setLevel(logging.INFO)
     filename = "Data Gathering - Python.csv"
     data_directory = "data"
+    result_directory = "results/Python StackOverflow"
     parent_dir = os.path.dirname(os.getcwd())
-    so_df = pandas.read_csv(os.path.join(parent_dir, data_directory, filename))
+    so_df = pandas.read_csv(os.path.join(parent_dir, data_directory, filename), encoding='UTF-16')
     urls = so_df['URL']
+    unique_identifiers = so_df['Question name']
+    # print(unique_identifiers[0])
     # urls = ["https://stackoverflow.com/questions/17429123/how-to-join-two-sets-in-one-line-without-using"]
-    for url in urls:
+    for index, url in enumerate(urls, start=1):
+        logging.info("Processing document {index} from {url}".format(index=index, url=url))
         soup = StackOverFlowScraper.get_soup(url)
         question = StackOverFlowScraper.get_question(soup)
         # pprint(question)
@@ -74,10 +80,12 @@ if __name__ == "__main__":
         # pprint(answers)
         document = [question, *answers]
         document = '\n'.join(document)
-        print(document)
-        toolkit = NLPTookit(document)
-        word_tokenizer(document)
-        break
+        if logging.root.level == logging.DEBUG:
+            print(document)
+        toolkit = NLPToolkit(
+            document,
+            os.path.join(parent_dir, result_directory, "{index}.json".format(index=index)),
+            unique_identifiers[index-1]
+        )
         # Delay query to prevent getting banned
-        time.sleep(3)
-
+        time.sleep(1)
