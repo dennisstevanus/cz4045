@@ -12,6 +12,6 @@ class WebScraper:
 
     @staticmethod
     def sanitize_text(text: str):
-        text.strip()
+        text = text.strip()
         text = text.replace('\n', ' ')
         return text

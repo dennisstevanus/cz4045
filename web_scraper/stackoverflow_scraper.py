@@ -1,5 +1,6 @@
 import logging
 import os
+import time
 from pprint import pprint
 
 import bs4
@@ -68,7 +69,15 @@ if __name__ == "__main__":
     for url in urls:
         soup = StackOverFlowScraper.get_soup(url)
         question = StackOverFlowScraper.get_question(soup)
-        pprint(question)
+        # pprint(question)
         answers = StackOverFlowScraper.get_answers(soup)
-        pprint(answers)
+        # pprint(answers)
+        document = [question, *answers]
+        document = '\n'.join(document)
+        print(document)
+        toolkit = NLPTookit(document)
+        word_tokenizer(document)
+        break
+        # Delay query to prevent getting banned
+        time.sleep(3)
 
