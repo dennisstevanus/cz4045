@@ -9,7 +9,7 @@ from utils.NLPToolkit import NLPToolkit
 
 
 if __name__ == "__main__":
-    logging.root.setLevel(logging.DEBUG)
+    logging.root.setLevel(logging.INFO)
     filename = "Data Gathering - Covid in Economy.csv"
     data_directory = "data"
     result_directory = "results/COVID"
