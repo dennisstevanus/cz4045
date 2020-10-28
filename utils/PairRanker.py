@@ -1,5 +1,7 @@
 import os
 
+from utils.PairGetter import PairGetter
+
 
 class PairRanker:
     negative_words = set()
@@ -31,18 +33,25 @@ class PairRanker:
 
     def calculate_weighted_rank(self):
         weighted_result = []
-        mult = 0.2
+        mult = 0.1
         for pair in self.common_pairs:
-            word_1 = pair[0][0]
-            word_2 = pair[0][1]
-            weight_1 = self.get_word_sentiment(word_1)
-            weight_2 = self.get_word_sentiment(word_2)
-            count = pair[1]
-            score = ((weight_1+weight_2)*count) * mult + count * (1-mult)
-            weighted_result.append((score, (word_1, word_2)))
-        print(sorted(weighted_result))
+            noun = pair[0]
+            noun_count = pair[1]["counter"]
+            for adj, adj_count in pair[1]["adj_list"].items():
+                adj_weight = self.get_word_sentiment(adj)
+                negative_multiplier = -1 if adj_weight < 0 else 1
+                count = noun_count * adj_count
+                score = ((abs(adj_weight) * count) * mult + count * (1-mult)) * negative_multiplier
+                weighted_result.append((score, (noun, adj)))
+        result = sorted(weighted_result, reverse=True)
+        print(result[:5])
+        print(result[-5:])
+
+
 
 
 if __name__ == "__main__":
-    pair_ranker = PairRanker([(('day', 'pay'), 5), (('films', 'foreign'), 5), (('movies', 'same'), 3), (('day', 'fine'), 3), (('movie', 'different'), 3)]	)
+    pair_getter = PairGetter()
+    noun_adj_pairs, _ = pair_getter.get_nouns_adj_pair()
+    pair_ranker = PairRanker(noun_adj_pairs)
     pair_ranker.calculate_weighted_rank()

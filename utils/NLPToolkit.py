@@ -1,3 +1,6 @@
+from pprint import pprint
+
+from nltk.corpus import wordnet
 import nltk
 import json
 from nltk.tokenize import word_tokenize
@@ -83,3 +86,63 @@ class NLPToolkit:
     def json_converter(dictionary, filename='json_file_1.json'):
         with open(filename, 'w+', encoding='utf16') as json_file:
             json.dump(dictionary, json_file)
+
+    @staticmethod
+    def noun_phrase_getter(sentence):
+        lemmatizer = nltk.WordNetLemmatizer()
+        tokens = [nltk.word_tokenize(sent) for sent in [sentence]]
+        postag = [nltk.pos_tag(sent) for sent in tokens][0]
+
+        # Rule for NP chunk and VB Chunk
+        grammar =  r"""
+            NBAR:
+                {<NN.*|JJ>*<NN.*>}  # Nouns and Adjectives, terminated with Nouns
+                
+            NP:
+                {<NBAR>}
+                {<NBAR><IN><NBAR>}  # Above, connected with in/of/etc...
+        """
+        #Chunking
+        cp = nltk.RegexpParser(grammar)
+
+        # the result is a tree
+        tree = cp.parse(postag)
+
+        def leaves(tree):
+            """Finds NP (nounphrase) leaf nodes of a chunk tree."""
+            for subtree in tree.subtrees(filter = lambda t: t.label() =='NP'):
+                yield subtree.leaves()
+
+        def get_word_postag(word):
+            if nltk.pos_tag([word])[0][1].startswith('J'):
+                return wordnet.ADJ
+            if nltk.pos_tag([word])[0][1].startswith('V'):
+                return wordnet.VERB
+            if nltk.pos_tag([word])[0][1].startswith('N'):
+                return wordnet.NOUN
+            else:
+                return wordnet.NOUN
+
+        def normalise(word):
+            """Normalises words to lowercase and stems and lemmatizes it."""
+            word = word.lower()
+            postag = get_word_postag(word)
+            word = lemmatizer.lemmatize(word,postag)
+            return word
+
+        def get_terms(tree):
+            for leaf in leaves(tree):
+                terms = [normalise(w) for w,t in leaf]
+                yield terms
+
+        terms = get_terms(tree)
+
+        features = []
+        for term in terms:
+            _term = ''
+            for word in term:
+                _term += ' ' + word
+            features.append(_term.strip())
+        # pprint(features)
+        return features
+

@@ -46,6 +46,6 @@ counter_all = Counter(noun_adj_pairs_map_all)
 counter_bigrams = Counter(noun_adj_pairs_map_bigram)
 
 print("Most common noun-adjective pairs")
-print(counter_all.most_common(5))
+print(counter_all.most_common(25))
 print("Most common noun-adjective bigrams")
-print(counter_bigrams.most_common(5))
+print(counter_bigrams.most_common(25))
