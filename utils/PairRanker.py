@@ -31,13 +31,14 @@ class PairRanker:
 
     def calculate_weighted_rank(self):
         weighted_result = []
+        mult = 0.2
         for pair in self.common_pairs:
             word_1 = pair[0][0]
             word_2 = pair[0][1]
             weight_1 = self.get_word_sentiment(word_1)
             weight_2 = self.get_word_sentiment(word_2)
             count = pair[1]
-            score = (weight_1+weight_2)*count
+            score = ((weight_1+weight_2)*count) * mult + count * (1-mult)
             weighted_result.append((score, (word_1, word_2)))
         print(sorted(weighted_result))
 
