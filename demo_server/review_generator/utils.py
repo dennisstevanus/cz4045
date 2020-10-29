@@ -1,4 +1,29 @@
-def generate_fake_review(input):
-    return input+"""
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam scelerisque aliquet arcu tempus viverra. Maecenas vitae purus ipsum. Pellentesque auctor mollis placerat. Aliquam sollicitudin vulputate neque, vel eleifend est. Aliquam gravida justo massa, ut consectetur mi dignissim id. Proin nec euismod nibh, vitae bibendum elit. Nulla facilisi. Proin arcu ligula, laoreet vitae finibus id, vulputate sed purus. 
-    """
+class Singleton(type):
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+
+class FakeReviewGenerator(metaclass=Singleton):
+    import gpt_2_simple as gpt2
+
+    def __init__(self):
+        self.sess = self.gpt2.start_tf_sess()
+        self.gpt2.load_gpt2(self.sess, run_name='run2', checkpoint_dir='./static/checkpoint')
+
+    def generate(self, input_text):
+        text = self.gpt2.generate(self.sess,
+                                  length=300,
+                                  temperature=0.7,
+                                  prefix="<|startoftext|>" + input_text,
+                                  truncate='<|endoftext|>',
+                                  checkpoint_dir='./static/checkpoint',
+                                  return_as_list=True,
+                                  run_name='run2',
+                                  include_prefix=False,
+                                  top_k=40
+                                  )[0]
+        return input_text + text
