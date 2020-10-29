@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Create new fake review!</h1>
+<form class="ui form" id="create_post_form" action="" method="post">
+    {% csrf_token %}
+    <div class="field">
+        <label>Enter the starting phrase(s) of the review here:</label>
+        <textarea rows=2 name="prefix"></textarea>
+    </div>
+<!--    <h3> {{ sample }}</h3>-->
+    <input type="submit" value="Submit" class="ui button"/>
+</form>
+
+{% if review %}
+<div class="ui items">
+    <div class="item">
+        <div class="content">
+            <div class="header">Result:</div>
+            <div class="description">
+                <p>{{ review }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
