@@ -80,9 +80,13 @@ class PairGetter:
                 for i in range(len(tag_list)):
                     if tag_list[i][1] in {"JJ", "JJR", "JJS"}:
                         adj = tag_list[i][0]
+                        nouns = set()
                         for j in range(len(tag_list)):
                             if tag_list[j][1] in {"NN", "NNS", "NNP", "NNPS"}:
                                 noun = tag_list[j][0]
+                                if noun in nouns:
+                                    continue
+                                nouns.add(noun)
                                 result_map[noun]["adj_count"] += 1
                                 if adj in result_map[noun]["adj_list"]:
                                     result_map[noun]["adj_list"][adj] += 1
