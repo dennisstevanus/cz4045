@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css"></link>
+    <title>NLP CZ4045 Demo</title>
+</head>
+<body>
+<div class="ui container">
+    <h1 class="ui dividing header" ><a href="{% url 'review_generator:index' %}">DEMO SERVER :D</a></h1>
+    {% block content %}
+    {% endblock %}
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.js"></script>
+<script>
+    $('select.dropdown')
+        .dropdown();
+    $('button.negative.ui.button').click(function(e){
+        e.preventDefault();
+        let msg=confirm("Are you sure??");
+        if(msg)
+        {
+            $(this).parent().submit();
+        }
+        else
+        {
+            return;
+        }
+    });
+
+</script>
+</body>
+</html>
