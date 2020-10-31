@@ -4,9 +4,9 @@ from bs4 import BeautifulSoup
 
 class WebScraper:
     @staticmethod
-    def get_soup(url_link):
+    def get_soup(url_link, params=None):
         headers = {'User-Agent': 'Mozilla/5.0'}
-        r = requests.get(url_link, headers=headers)
+        r = requests.get(url_link, headers=headers, params=params)
         html_doc = r.text
         soup = BeautifulSoup(html_doc, 'html5lib')
         return soup

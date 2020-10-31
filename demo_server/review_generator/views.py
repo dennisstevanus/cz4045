@@ -11,7 +11,7 @@ class ReviewGeneratorView(TemplateView):
         context = self.get_context_data(**kwargs)
         input_text = request.POST['prefix']
         logging.info(input_text)
-        response = utils.generate_fake_review(input_text)
+        response = utils.FakeReviewGenerator().generate(input_text)
 
         context['review'] = response
 
