@@ -11,7 +11,7 @@ from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 
 class NLPToolkit:
 
-    def __init__(self, document=None, save_file="", unique_identifier=""):
+    def __init__(self, document=None, save_file="", unique_identifier="", print=False):
         if document is not None:
             self.json_dict = {
                 'unique_identifier': "",
@@ -38,7 +38,8 @@ class NLPToolkit:
                 pos_tagged_tokens = self.pos_tagger(i)
                 self.json_dict['pos_tagger'].append(pos_tagged_tokens)
 
-            # print(self.json_dict)
+            if print:
+                pprint(self.json_dict)
             if save_file != "":
                 self.json_converter(self.json_dict, save_file)
 
@@ -94,7 +95,7 @@ class NLPToolkit:
         postag = [nltk.pos_tag(sent) for sent in tokens][0]
 
         # Rule for NP chunk and VB Chunk
-        grammar =  r"""
+        grammar = r"""
             NBAR:
                 {<NN.*|JJ>*<NN.*>}  # Nouns and Adjectives, terminated with Nouns
                 
@@ -102,7 +103,7 @@ class NLPToolkit:
                 {<NBAR>}
                 {<NBAR><IN><NBAR>}  # Above, connected with in/of/etc...
         """
-        #Chunking
+        # Chunking
         cp = nltk.RegexpParser(grammar)
 
         # the result is a tree
@@ -110,7 +111,7 @@ class NLPToolkit:
 
         def leaves(tree):
             """Finds NP (nounphrase) leaf nodes of a chunk tree."""
-            for subtree in tree.subtrees(filter = lambda t: t.label() =='NP'):
+            for subtree in tree.subtrees(filter=lambda t: t.label() == 'NP'):
                 yield subtree.leaves()
 
         def get_word_postag(word):
@@ -127,12 +128,12 @@ class NLPToolkit:
             """Normalises words to lowercase and stems and lemmatizes it."""
             word = word.lower()
             postag = get_word_postag(word)
-            word = lemmatizer.lemmatize(word,postag)
+            word = lemmatizer.lemmatize(word, postag)
             return word
 
         def get_terms(tree):
             for leaf in leaves(tree):
-                terms = [normalise(w) for w,t in leaf]
+                terms = [normalise(w) for w, t in leaf]
                 yield terms
 
         terms = get_terms(tree)
@@ -146,3 +147,7 @@ class NLPToolkit:
         # pprint(features)
         return features
 
+
+if __name__ == "__main__":
+    text = """"The lightning-struck tower. Calamity. Disaster. Coming nearer all the time."—Prediction of the battle[src] The Battle of the Astronomy Tower,[2] also known as the Battle of the Lightning-Struck Tower, was the second major conflict of the Second Wizarding War. It took place in the topmost part of the Astronomy Tower, a few corridors of the 7th Floor, the Marble Staircase, the Great Hall, the Entrance Hall, and the grounds of Hogwarts School of Witchcraft and Wizardry, in the mountainous region of Scotland, Great Britain on the evening of 30 June, 1997.[1][3] Lord Voldemort secretly organised the attack by ordering sixteen-year-old Death Eater and Hogwarts student Draco Malfoy to assassinate Albus Dumbledore, the only wizard in the world who Voldemort feared. Although his previous attempts at assassination had failed, Draco managed to sneak a number of Death Eaters into Hogwarts via a pair of Vanishing Cabinets in the Room of Requirement, and they encountered a number of Hogwarts teachers, students, Dumbledore's Army members, and Order of the Phoenix members, who had been standing guard at the school at the request of both Dumbledore and Harry Potter. As the Order of the Phoenix and the Death Eaters battled,[3] Severus Snape killed Dumbledore,[4] an act that was later discovered to have been secretly planned between Dumbledore and Snape, as Dumbledore would soon afterwards still have died after putting on Marvolo Gaunt's cursed ring, which was a Horcrux, and was afflicted with a deadly curse that would have eventually killed him anyway.[5]"""
+    NLPToolkit(text, save_file="../results/result_test.json", print=True)
