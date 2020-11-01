@@ -26,7 +26,7 @@ def count_noun_adj_pairs_bigram(noun_adj_pairs_map, tag_list):
 
 tk = NLPToolkit()
 
-with open("data/Noun-Adjective Pairs - Trustpilot.txt", "r") as f:
+with open("../../data/Noun-Adjective Pairs - Trustpilot.txt", "r") as f:
     lines = f.readlines()
 
 text_list = []
