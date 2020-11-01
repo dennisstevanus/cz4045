@@ -2,7 +2,7 @@ CZ4045 Assignment 1
 ===================
 
 In this github repository there are 3 different section.
-1. Domain Specific Dataset Analysis
+1. Domain Specific set Analysis
 2. Development of a (Noun - Adjective) Pair Ranker
 3. Application based on the reviews dataset collected in [2.]
 
@@ -27,6 +27,10 @@ Content information
 ------------
 *   `data`: Contains all the dataset used in this project
 *   `data_analyisis`: Contains the code used to analyze the data in this project
+    *   `data_analysis.ipynb`: It's a Jupyter notebook that containing the code used to analyze the data for the [3.1]. You can run the file in jupyter notebook by     opening the jupyter notebook on terminal and try to see the analysis there.
+        ```bash
+        jupyter notebook
+        ```
 *   `demo_server`: Contains the demo server for the Application [3.]
 *   `model_training`: Contains the jupyter notebook code to train and fine-tune the model for [3.] 
 *   `results`: Contains the `.json` file containing the result of the NLP tasks performed on each document 
@@ -109,16 +113,6 @@ Content information
 
 Note: If your default `python` is 2.7, you may need to run using command `python3` instead. 
 Python version can be checked using `python --version`.  
-
-Domain Specific Dataset Analysis
---------------------------------
-Is it needed?
-
-#### NLTK Toolkit ####
-`Please input details here`
-
-#### Jupyter Data analysis ####
-Is it needed?
 
 Application for the (Noun - Adjective) Pair Ranker
 --------------------------------------------------
