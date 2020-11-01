@@ -93,14 +93,13 @@ class PairGetter:
                                 else:
                                     result_map[noun]["adj_list"][adj] = 1
 
-        result_list = sorted(result_map.items(), key=lambda item: item[1]["adj_count"] * item[1]["counter"], reverse=True)
+        result_list = sorted(result_map.items(), key=lambda item: item[1]["adj_count"] * item[1]["counter"],
+                             reverse=True)
         # pprint(result_list[:10])
         return result_list, result_map
 
 
-
-
 if __name__ == "__main__":
     pair_getter = PairGetter()
-    result_list, _ = pair_getter.get_nouns_adj_pair()
-    pprint(result_list[:10])
+    result, _ = pair_getter.get_nouns_adj_pair()
+    pprint(result[:10])
