@@ -13,7 +13,7 @@ class PairGetter:
         self.review_list = []
         for line in lines:
             self.review_list.append(line.strip())
-        print(self.review_list)
+        # print(self.review_list)
         # self.review_list = self.review_list[:2]
 
         self.tk = NLPToolkit()
@@ -39,7 +39,7 @@ class PairGetter:
         noun_phrase_list = [(k, {"counter": v["counter"], "review_appearance": v["review_appearance"]}) for k, v in
                             sorted(noun_phrase_map.items(), key=lambda item: item[1]["review_appearance"],
                                    reverse=True)]
-        pprint(noun_phrase_list)
+        # pprint(noun_phrase_list)
         return noun_phrase_list
 
     def get_nouns(self):
@@ -94,7 +94,7 @@ class PairGetter:
                                     result_map[noun]["adj_list"][adj] = 1
 
         result_list = sorted(result_map.items(), key=lambda item: item[1]["adj_count"] * item[1]["counter"], reverse=True)
-        pprint(result_list[:10])
+        # pprint(result_list[:10])
         return result_list, result_map
 
 
@@ -102,4 +102,5 @@ class PairGetter:
 
 if __name__ == "__main__":
     pair_getter = PairGetter()
-    pair_getter.get_nouns_adj_pair()
+    result_list, _ = pair_getter.get_nouns_adj_pair()
+    pprint(result_list[:10])
