@@ -2,7 +2,7 @@ CZ4045 Assignment 1
 ===================
 
 In this github repository there are 3 different section.
-1. Domain Specific Dataset Analysis
+1. Domain Specific set Analysis
 2. Development of a (Noun - Adjective) Pair Ranker
 3. Application based on the reviews dataset collected in [2.]
 
@@ -27,8 +27,13 @@ Content information
 ------------
 *   `data`: Contains all the dataset used in this project
 *   `data_analyisis`: Contains the code used to analyze the data in this project
-*   `demo_server`: Contains the demo server for the Application [3.]
-*   `model_training`: Contains the jupyter notebook code to train and fine-tune the model for [3.] 
+    *   `data_analysis.ipynb`: It's a Jupyter notebook that containing the code used to analyze the data for the [3.1]. You can run the file in jupyter notebook by     opening the jupyter notebook on terminal and try to see the analysis there.
+        ```bash
+        jupyter notebook
+        ```
+*   `demo_server`: Contains the demo server for the Application [3.3]
+*   `model_training`: Contains the jupyter notebook code to train and fine-tune the model for [3.3] 
+    * `FineTuning_of_GPT_2.ipynb`: It's a Jupyter notebook used to fine-tune the model of GPT-2. As it requires GPU, it is advised to upload this to Google Drive and use Google Colab to open (and fine-tune the model) instead.
 *   `results`: Contains the `.json` file containing the result of the NLP tasks performed on each document 
 *   `utils`: Contains several python scripts developed by our team to perform the required tasks. 
     Below are the description of each script and its usage guide: 
@@ -110,16 +115,28 @@ Content information
 Note: If your default `python` is 2.7, you may need to run using command `python3` instead. 
 Python version can be checked using `python --version`.  
 
-Domain Specific Dataset Analysis
---------------------------------
-Is it needed?
-
-#### NLTK Toolkit ####
-`Please input details here`
-
-#### Jupyter Data analysis ####
-Is it needed?
-
 Application for the (Noun - Adjective) Pair Ranker
 --------------------------------------------------
-`Please input more details here`
+For the application, some extra steps are needed to run the program.
+* Download the model from [here](https://entuedu-my.sharepoint.com/:u:/g/personal/skurnia001_e_ntu_edu_sg/EfgaJvvxNA5Br-BteyjWTA8BIZ0SkbPsmShY7DcEt5xHrQ?e=x92uTh)
+* Extract the packaged model
+* Put the extracted model in \demo_server\
+
+In the end, the structure of the static folder of the demo server should look like this:
+```
+demo_server
+|
+- static
+    |
+    - checkpoint
+        |
+        - run2
+            |
+            - (many files)
+```
+
+After placing the model in the right place, just run the server by this command `python manage.py runserver`.
+
+A webserver will be opened, and can be accessed (usually) at http://127.0.0.1:8000 .
+From that link, there will be a text box, which is the user input for the prefix of the review. After generating the 
+review, the end result will contain those input as the prefix.
