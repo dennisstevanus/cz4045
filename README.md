@@ -157,4 +157,4 @@ Error troubleshooting
     ModuleNotFoundError: No module named 'web_scraper'
     ```
     most likely you have not done the Installation step 7. Please do the instructions described in step 7.
-*   If you encountered `FileNotFoundError` when running the demo server, most likely you missed the installation step for the Pair Ranker application. Please try to follow the steps described in the instructions above. 
+*   If you encountered `FileNotFoundError` or any other errors when running the demo server, most likely you missed the installation step for the Pair Ranker application or there are missing files in your project directory. Please try to follow the steps described in the instructions above. 
