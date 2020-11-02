@@ -36,7 +36,7 @@ Content information
         ```bash
         jupyter notebook
         ```
-*   `demo_server`: Contains the demo server for the Application [3.3]
+*   `demo_server`: Contains the demo server for the Application [3.]
 *   `model_training`: Contains the jupyter notebook code to train and fine-tune the model for [3.3] 
     * `FineTuning_of_GPT_2.ipynb`: It's a Jupyter notebook used to fine-tune the model of GPT-2. As it requires GPU, it is advised to upload this to Google Drive and use Google Colab to open (and fine-tune the model) instead.
 *   `results`: Contains the `.json` file containing the result of the NLP tasks performed on each document 
@@ -89,7 +89,8 @@ Content information
         *   `adj_count`: Showing the number of adjectives accompanying the noun in the same sentence. 
         *   `adj_list`: Containing a dictionary that listed each adjective accompanying the noun in the same sentence as well as their respective number of occurences. 
         *   `review_appearance`: Number of distinct reviews the noun has appeared. 
-    *   `PairRanker`: A module developed by our team to calculate scores and rank each <Noun- Adjective> pairs obtained from `PairGetter.py`.  
+    *   `PairRanker`: A module developed by our team to calculate scores and rank each <Noun- Adjective> pairs obtained from `PairGetter.py`.
+    This is the script that is executed to get the values shown in the report for task [2.]
     You can run the `Pairranker.py` directly from the terminal(ex. cmd, bash) to try and test it:
         ```bash
         python PairRanker.py
