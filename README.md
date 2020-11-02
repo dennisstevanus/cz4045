@@ -1,7 +1,7 @@
 CZ4045 Assignment 1
 ===================
 
-In this github repository there are 3 different section.
+In this github repository there are 3 different subtasks: 
 1. Domain Specific set Analysis
 2. Development of a (Noun - Adjective) Pair Ranker
 3. Application based on the reviews dataset collected in [2.]
@@ -11,17 +11,22 @@ Before starting for the each specific section, let's see how to install the requ
 Installation
 ------------
 Below are step by step guide to clone this repository and install the required library used.
-1. Make sure you've installed git in your computer.
-2. Clone this specific repository.
+1.  Make sure you've installed git in your computer. (Note: Skip to step 4 if you already have the code from the submission zip and just open a terminal in the source code directory instead.)
+2.  Clone this specific repository. 
     1. If you have the Github Desktop, just find the "Clone Repository" in the File menu and enter this "https://github.com/dennisstevanus/cz4045.git".
     2. If you are using Github from terminal, you can just enter this code `git clone https://github.com/dennisstevanus/cz4045.git`.
-3. If you like to you can setup an virtual environment
-    1. Making the the virtual environment run this on terminal `python3 -m venv venv`
+3.  Go to the the repository directory. For example, after running the step 2.2 above, you can use `cd cz4045`. This will be referred as `project root directory`. 
+4.  Setup an virtual environment (optional). 
+    The following are the tutorial on how to setup venv on Unix machine. For windows or more information, see this [link](https://docs.python.org/3/tutorial/venv.html)
+    1. Making the the virtual environment:
+        run this on terminal `python3 -m venv venv`
     2. Activate the Virtual environment `source venv/bin/activate`
-4. Install the required library by running this in terminal `pip install -r requirements.txt`
-5. Install the corpus needed for the Python NLTK
+5.  Install the required library by running this in terminal `pip install -r requirements.txt`
+6.  Install the corpus needed for the Python NLTK
     1. Run the nltk_download python script `python3 nltk_download.py`
     2. Choose the **all** for the all packages under the **Collections** tab. Download All Packages
+7.  **Important!** Setup the `PYTHONPATH` to include `project root directory` in the the `PYTHONPATH`. Tutorial on how to set this up is on this [link](https://bic-berkeley.github.io/psych-214-fall-2016/using_pythonpath.html). 
+    Otherwise, it can also be done by using `PyCharm IDE` and then using the IDE's [code run assistance](https://www.jetbrains.com/help/pycharm/code-running-assistance-tutorial.html) which by default add `project root directory` to the `PYTHONPATH`. 
 
 Content information
 ------------
@@ -118,9 +123,9 @@ Python version can be checked using `python --version`.
 Application for the (Noun - Adjective) Pair Ranker
 --------------------------------------------------
 For the application, some extra steps are needed to run the program.
-* Download the model from [here](https://entuedu-my.sharepoint.com/:u:/g/personal/skurnia001_e_ntu_edu_sg/EfgaJvvxNA5Br-BteyjWTA8BIZ0SkbPsmShY7DcEt5xHrQ?e=x92uTh)
-* Extract the packaged model
-* Put the extracted model in \demo_server\
+1.   Download the model from [here](https://entuedu-my.sharepoint.com/:u:/g/personal/skurnia001_e_ntu_edu_sg/EfgaJvvxNA5Br-BteyjWTA8BIZ0SkbPsmShY7DcEt5xHrQ?e=x92uTh)
+2.   Extract the packaged model
+3.   Put the extracted model in \demo_server\
 
 In the end, the structure of the static folder of the demo server should look like this:
 ```
@@ -140,3 +145,15 @@ After placing the model in the right place, just run the server by this command 
 A webserver will be opened, and can be accessed (usually) at http://127.0.0.1:8000 .
 From that link, there will be a text box, which is the user input for the prefix of the review. After generating the 
 review, the end result will contain those input as the prefix.
+
+
+Error troubleshooting
+------------
+
+*   If you encountered `ImportError` messages, most likely you have missed Installation step 5. Please do the instructions described in step 5.
+*   If you encountered `ModuleNotFoundError` messages like this: 
+    ```
+    ModuleNotFoundError: No module named 'web_scraper'
+    ```
+    most likely you have not done the Installation step 7. Please do the instructions described in step 7.
+*   If you encountered `FileNotFoundError` when running the demo server, most likely you missed the installation step for the Pair Ranker application. Please try to follow the steps described in the instructions above. 
